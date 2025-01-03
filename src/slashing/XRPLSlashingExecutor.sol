@@ -21,7 +21,7 @@ contract XRPLSlashingExecutor is ReentrancyGuard, AccessControl {
     event SlashingOperationExecuted(bytes32 indexed operationId);
     
     constructor() {
-        _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
+        _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
     }
     
     function createSlashingOperation(

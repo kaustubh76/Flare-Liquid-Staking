@@ -3,6 +3,8 @@ pragma solidity ^0.8.19;
 // src/security/SecurityModule.sol
 import "lib/openzeppelin-contracts/contracts/utils/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/access/AccessControl.sol";
+import "src/interfaces/security/ITEEValidator.sol";
+import "src/security/MultiSigController.sol";
 
 contract SecurityModule is ReentrancyGuard, AccessControl {
     bytes32 public constant OPERATOR_ROLE = keccak256("OPERATOR_ROLE");
@@ -13,7 +15,7 @@ contract SecurityModule is ReentrancyGuard, AccessControl {
     event SecurityStateUpdated(bytes32 indexed state);
     
     constructor(address _teeValidator, address _multiSig) {
-        _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
+        _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
         teeValidator = ITEEValidator(_teeValidator);
         multiSig = MultiSigController(_multiSig);
     }

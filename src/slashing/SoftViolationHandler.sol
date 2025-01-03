@@ -25,7 +25,7 @@ contract SoftViolationHandler is ReentrancyGuard, AccessControl {
     event ViolationResolved(bytes32 indexed violationId, uint256 slashAmount);
     
     constructor() {
-        _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
+        _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
     }
     
     function reportViolation(

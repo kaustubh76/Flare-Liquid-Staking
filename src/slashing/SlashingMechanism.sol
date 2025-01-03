@@ -19,7 +19,7 @@ contract SlashingMechanism is ISlashingMechanism, ReentrancyGuard, AccessControl
     uint256 public constant SLASHING_DELAY = 1 days;
     
     constructor(address _stakingContract) {
-        _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
+        _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
         stakingContract = IFlareStaking(_stakingContract);
         
         // Initialize default slashing penalties
