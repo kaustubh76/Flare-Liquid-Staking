@@ -15,9 +15,15 @@ library Errors {
     error StakingLocked();
     error NoRewardsAvailable();
     error InvalidLockPeriod();
-    error ValidatorNotActive();
+    error ValidatorNotFound();
     error InvalidStakeState();
     error TransferFailed();
+    error ValidatorExists();
+    error MaxValidatorsReached();
+    error BelowMinimumStake();
+    error AboveMaximumStake();
+    error InsufficientRewardPool();
+    error InvalidXRPLAccount();
 
     // Governance Errors
     error ProposalNotActive();
