@@ -33,7 +33,7 @@ contract LiquidStakingTokenTest is Test {
 
         // Deploy token with initial settings
         vm.startPrank(owner);
-        token = new LiquidStakingToken(owner);
+        token = new LiquidStakingToken();
         token.grantRole(token.MINTER_ROLE(), minter);
         token.grantRole(token.BURNER_ROLE(), burner);
         vm.stopPrank();
@@ -79,35 +79,35 @@ contract LiquidStakingTokenTest is Test {
         vm.stopPrank();
     }
 
-    // function testPermitFunctionality() public {
-    //     uint256 privateKey = 0xA11CE;
-    //     address owner = vm.addr(privateKey);
-    //     address spender = user2;
+    function testPermitFunctionality() public {
+        uint256 privateKey = 0xA11CE;
+        address owner = vm.addr(privateKey);
+        address spender = user2;
         
-    //     uint256 value = TEST_AMOUNT;
-    //     uint256 deadline = block.timestamp + 1 hours;
-    //     uint8 v;
-    //     bytes32 r;
-    //     bytes32 s;
+        uint256 value = TEST_AMOUNT;
+        uint256 deadline = block.timestamp + 1 hours;
+        uint8 v;
+        bytes32 r;
+        bytes32 s;
         
-    //     // Generate permit signature
-    //     bytes32 digest = token.getPermitDigest(
-    //         owner,
-    //         spender,
-    //         value,
-    //         token.nonces(owner),
-    //         deadline
-    //     );
+        // Generate permit signature
+        bytes32 digest = token.getPermitDigest(
+            owner,
+            spender,
+            value,
+            token.nonces(owner),
+            deadline
+        );
         
-    //     (v, r, s) = vm.sign(privateKey, digest);
+        (v, r, s) = vm.sign(privateKey, digest);
 
-    //     // Execute permit
-    //     token.permit(owner, spender, value, deadline, v, r, s);
+        // Execute permit
+        token.permit(owner, spender, value, deadline, v, r, s);
 
-    //     // Verify permit results
-    //     assertEq(token.allowance(owner, spender), value);
-    //     assertEq(token.nonces(owner), 1);
-    // }
+        // Verify permit results
+        assertEq(token.allowance(owner, spender), value);
+        assertEq(token.nonces(owner), 1);
+    }
 
     function testPauseAndUnpause() public {
         vm.startPrank(owner);

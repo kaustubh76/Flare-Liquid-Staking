@@ -36,7 +36,7 @@ contract StakingPoolTest is Test {
 
         // Deploy contracts
         vm.startPrank(owner);
-        stakingToken = new LiquidStakingToken(owner);
+        stakingToken = new LiquidStakingToken();
         stakingPool = new StakingPool(address(stakingToken));
 
         // Setup roles
